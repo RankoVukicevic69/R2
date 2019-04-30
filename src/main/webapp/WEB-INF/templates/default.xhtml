@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>jboss-javaee-webapp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h:outputStylesheet name="css/styles.css" />
+    <h:outputScript library="js" name="montenegroLocale.js"/>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+   		<p:layoutUnit styleClass="ui-widget ui-widget-header" position="north" size="40" header="Naziv applikativnog rjeshenja" />
+  		<p:layoutUnit position="west" header="Opcije" collapsible="true">
+      		<h:form>
+           		<h:panelGroup>
+           			<h:panelGrid columns="1">
+	               		<p:commandButton id="btn1" value="Search Document A" style="width: 180px;"/>
+	               		<p:commandButton id="btn2" value="Search Document B" style="width: 180px;"/>
+               		</h:panelGrid>
+           		</h:panelGroup>
+         	</h:form>
+    	</p:layoutUnit>
+		<ui:insert name="content">
+	    	[Template content will be inserted here]
+		</ui:insert>
+   		<p:layoutUnit styleClass="ui-widget ui-widget-header" position="south" size="40" header="@Copirifgh COREIT" />
+    </p:layout>
+</h:body>
+</html>
