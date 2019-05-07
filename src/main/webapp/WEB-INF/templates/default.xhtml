@@ -14,14 +14,9 @@
 	<p:layout fullPage="true">
    		<p:layoutUnit styleClass="ui-widget ui-widget-header" position="north" size="40" header="Naziv applikativnog rjeshenja" />
   		<p:layoutUnit position="west" header="Opcije" collapsible="true">
-      		<h:form>
-           		<h:panelGroup>
-           			<h:panelGrid columns="1">
-	               		<p:commandButton id="btn1" value="Search Document A" style="width: 180px;"/>
-	               		<p:commandButton id="btn2" value="Search Document B" style="width: 180px;"/>
-               		</h:panelGrid>
-           		</h:panelGroup>
-         	</h:form>
+  			<ui:insert name="left">
+ 	    		[Template content will be inserted here]
+			</ui:insert>
     	</p:layoutUnit>
 		<ui:insert name="content">
 	    	[Template content will be inserted here]

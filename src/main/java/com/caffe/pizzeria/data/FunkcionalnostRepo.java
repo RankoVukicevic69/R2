@@ -7,7 +7,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-//import javax.persistence.Query;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -32,17 +32,19 @@ public class FunkcionalnostRepo {
         return em.find(Funkcionalnost.class, id);
     }
    
+    @SuppressWarnings("unchecked")
+	public List<Funkcionalnost> findByNadId(Long nadId) {
+    	String hql = "SELECT f FROM funkcionalnost f LEFT JOIN f.nadredjena n WHERE f.aktivna = true AND n.id = " + nadId.toString();
+    	Query query = em.createQuery(hql);
+    	return (List<Funkcionalnost>)query.getResultList();
+    }
+
     public Funkcionalnost findByNaziv(String naziv) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Funkcionalnost> criteria = cb.createQuery(Funkcionalnost.class);
         Root<Funkcionalnost> funkcionalnost = criteria.from(Funkcionalnost.class);
         criteria.select(funkcionalnost).where(cb.equal(funkcionalnost.get("naziv"), naziv));
         return em.createQuery(criteria).getSingleResult();
-    	//Query query = em.createQuery("SELECT f FROM Funkcionalnost f LEFT OUTHER JOIN f.metode m WHERE f.naziv = '" + naziv + "'");
-		//@SuppressWarnings("unchecked")
-		//List<Funkcionalnost> funkcionalnosti = query.getResultList();
-        //if (funkcionalnosti != null && funkcionalnosti.size() > 0) return funkcionalnosti.get(0);
-        //return null;
     }
 
     public List<Funkcionalnost> findAll() {
@@ -51,11 +53,6 @@ public class FunkcionalnostRepo {
         Root<Funkcionalnost> funkcionalnost = criteria.from(Funkcionalnost.class);
         criteria.select(funkcionalnost);
         return em.createQuery(criteria).getResultList();
-
-        //Query query = em.createQuery("SELECT f FROM Funkcionalnost f LEFT OUTHER JOIN f.metode m ORDER BY f.naziv ASC");
-		//@SuppressWarnings("unchecked")
-		//List<Funkcionalnost> funkcionalnosti = query.getResultList();
-        //return funkcionalnosti;
     }
 
     public void Dodaj(Funkcionalnost funkcionalnost) throws Exception {
@@ -73,6 +70,7 @@ public class FunkcionalnostRepo {
         	throw tr;
         }
     }
+    
     public void Izmijeni(Funkcionalnost funkcionalnost) throws Exception {
         userTransaction.begin();
         em.joinTransaction();

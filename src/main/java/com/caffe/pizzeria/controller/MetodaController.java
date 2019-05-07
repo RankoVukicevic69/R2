@@ -17,6 +17,8 @@ import javax.persistence.PersistenceException;
 import com.caffe.pizzeria.data.MetodaRepo;
 import com.caffe.pizzeria.model.Metoda;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 @Named
 @ViewScoped
@@ -132,4 +134,18 @@ public class MetodaController implements Serializable{
         return errorMessage;
     }
 
+	public void onRowSelect(SelectEvent event) {
+        //izabranaMetoda =  (Metoda) event.getObject();
+        if (izabranaMetoda != null) {
+        	System.out.println("Metoda : " + izabranaMetoda.getNaziv());        	
+        }
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+    	//izabranaMetoda = null;
+        if (izabranaMetoda == null) {
+        	System.out.println("Metoda : null");        	
+        }
+    	
+    }
 }

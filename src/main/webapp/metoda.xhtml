@@ -6,65 +6,70 @@
     xmlns:p="http://primefaces.org/ui"
     template="/WEB-INF/templates/default.xhtml">
     <ui:define name="content">
-    	<h:form id="reg">
-    		<p:growl id="msgs" showDetail="true" life="2000" />
-         	<h:panelGroup rendered="#{empty metodaController.metode}">
-            	<em>Nema registrovanih metoda.</em>
-        	</h:panelGroup>
-     		<p:dataTable id="tbMetoda" vidgetwar="tbMetoda" var="_metoda" value="#{metodaController.metode}" 
-     			rows="10" 
-     			rendered="#{not empty metodaController.metode}" paginator="true"
-     			currentPageReportTemplate="{startRecord} - {endRecord} od {totalRecords}"
-              	paginatorTemplate="[Definisanje Metoda] {CurrentPageReport} {FirstPageLink} 
-              	{PreviousPageLink} {PageLinks} {NextPageLink} 
-              	{LastPageLink} {RowsPerPageDropdown}"
-               	rowsPerPageTemplate="5,10,15"
-               	paginatorPosition="top"
-               	selectionMode="single" 
-               	selection="#{metodaController.izabranaMetoda}" 
-               	rowKey="#{_metoda.id}">
-               	
-              	<p:ajax event="rowSelect" update=":dodavanje:pgNova :dodavanje:pgIzmjena"/>
-        		<p:ajax event="rowUnselect" update=":dodavanje:pgNova  :dodavanje:pgIzmjena"/>
-               	
-            	<p:column headerText="No" styleClass="ccr" sortBy="#{_metoda.id}" >
-            		<h:outputText value="#{_metoda.id}" />
-        		</p:column>
-            	<p:column filterBy="#{_metoda.naziv}" sortBy="#{_metoda.naziv}" headerText="Naziv" filterMatchMode="contains">
-                	<h:outputText value="#{_metoda.naziv}" />
-         		</p:column>
-        	</p:dataTable>
-		</h:form>       
-    </ui:define>
-    <ui:define name="right">
-    	<h:form id="dodavanje">
-			<h:panelGroup id="pgNova" >
-    			<p:panel id="pNova" header="Nova Metoda" rendered="#{empty metodaController.izabranaMetoda}">
-		 	 		<h:panelGrid  columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6">
-		 	 			<f:facet name = "header">
-	      					<h:outputText value = ""/>
-	   					</f:facet>
-						<p:outputLabel for="naziv" value="Naziv:" />
-					  	<p:inputText id="naziv" value="#{metodaController.novaMetoda.naziv}"/>
-					   	<p:outputLabel />
-					  	<p:commandButton value="Dodaj" update=":reg :dodavanje:pgNova :dodavanje:pgIzmjena" action="#{metodaController.Dodaj}" />
-					</h:panelGrid>
-				</p:panel>
-      		</h:panelGroup>		
-			<h:panelGroup id="pgIzmjena" >
-    			<p:panel id="pIzmjena" header="Izabrana Metoda" rendered="#{not empty metodaController.izabranaMetoda}" >
-	 	 	 		<h:panelGrid columns="2">
-						<p:outputLabel for="idI" value="Id:" />
-						<p:outputLabel id="idI" value="#{netodaController.izabranaMetoda.id}" />
-						<p:outputLabel for="nazivI" value="Naziv:" />
-				    	<p:inputText id="nazivI" value="#{netodaController.izabranaMetoda.naziv}"/>
-				      	<p:outputLabel />
-						<f:facet name="footer">
-			      			<p:commandButton value="Izmijeni" update=":reg:tbMetoda :reg:msgs" action="#{metodaController.Izmijeni}" />
-            			</f:facet>  
-					</h:panelGrid>
-				</p:panel>
-      		</h:panelGroup>		
-    	</h:form>
+   		<p:layoutUnit styleClass="ui-widget ui-widget-header" position="center" header="Lista Metoda">
+	    	<h:form id="reg">
+	    		<p:growl id="msgs" showDetail="true" life="2000" />
+	         	<h:panelGroup rendered="#{empty metodaController.metode}">
+	            	<em>Nema registrovanih metoda.</em>
+	        	</h:panelGroup>
+	     		<p:dataTable id="tbMetoda" vidgetwar="tbMetoda" var="_metoda" value="#{metodaController.metode}" 
+	     			rows="10" 
+	     			rendered="#{not empty metodaController.metode}" paginator="true"
+	     			currentPageReportTemplate="{startRecord} - {endRecord} od {totalRecords}"
+	              	paginatorTemplate="[Definisanje Metoda] {CurrentPageReport} {FirstPageLink} 
+	              	{PreviousPageLink} {PageLinks} {NextPageLink} 
+	              	{LastPageLink} {RowsPerPageDropdown}"
+	               	rowsPerPageTemplate="5,10,15"
+	               	paginatorPosition="top"
+	               	selectionMode="single" 
+	               	selection="#{metodaController.izabranaMetoda}" 
+	               	rowKey="#{_metoda.id}">
+
+		        	<p:ajax event="rowSelect" listener="#{metodaController.onRowSelect}" update=":dodavanje :izmjena"/>
+		        	<p:ajax event="rowUnselect" listener="#{metodaController.onRowUnselect}" update=":izmjena :dodavanje"/>
+	               	
+	            	<p:column headerText="No" styleClass="ccr" sortBy="#{_metoda.id}" >
+	            		<h:outputText value="#{_metoda.id}" />
+	        		</p:column>
+	            	<p:column filterBy="#{_metoda.naziv}" sortBy="#{_metoda.naziv}" headerText="Naziv" filterMatchMode="contains">
+	                	<h:outputText value="#{_metoda.naziv}" />
+	         		</p:column>
+	        	</p:dataTable>
+			</h:form>
+		</p:layoutUnit>      
+  		<p:layoutUnit class="lp" position="east" size="400" collapsible="true" header="Metoda">
+	    	<h:form id="dodavanje" rendered="#{empty metodaController.izabranaMetoda}">
+				<h:panelGroup id="pgNova" >
+	    			<p:panel id="pNova" header="Nova Metoda" rendered="#{empty metodaController.izabranaMetoda}">
+			 	 		<h:panelGrid  columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6">
+			 	 			<f:facet name = "header">
+		      					<h:outputText value = ""/>
+		   					</f:facet>
+							<p:outputLabel for="naziv" value="Naziv:" />
+						  	<p:inputText id="naziv" value="#{metodaController.novaMetoda.naziv}"/>
+						   	<p:outputLabel />
+						  	<p:commandButton value="Dodaj" update=":reg :dodavanje :izmjena" action="#{metodaController.Dodaj}" />
+						</h:panelGrid>
+					</p:panel>
+	      		</h:panelGroup>		
+	    	</h:form>
+	    	<h:form id="izmjena" rendered="#{not empty metodaController.izabranaMetoda}">
+				<h:panelGroup id="pgIzmjena" >
+	    			<p:panel id="pIzmjena" header="Izabrana Metoda" rendered="#{not empty metodaController.izabranaMetoda}" >
+		 	 	 		<h:panelGrid columns="2">
+							<p:outputLabel for="idI" value="Id:" />
+							<p:outputLabel id="idI" value="#{netodaController.izabranaMetoda.id}" />
+							<p:outputLabel for="nazivI" value="Naziv:" />
+					    	<p:inputText id="nazivI" value="#{netodaController.izabranaMetoda.naziv}"/>
+					      	<p:outputLabel />
+							<f:facet name="footer">
+				      			<p:commandButton value="Izmijeni" update=":reg :dodavanje :izmjena" action="#{metodaController.Izmijeni}" />
+	            			</f:facet>  
+						</h:panelGrid>
+					</p:panel>
+	      		</h:panelGroup>	
+	      			
+	    	</h:form>
+		</p:layoutUnit>
     </ui:define>
 </ui:composition>

@@ -41,6 +41,17 @@ public class Funkcionalnost implements Serializable{
 	@ManyToOne
     private Funkcionalnost nadredjena;
 	
+	@ManyToOne
+    private Stranica stranica;
+	
+	public Stranica getStranica() {
+		return stranica;
+	}
+
+	public void setStranica(Stranica stranica) {
+		this.stranica = stranica;
+	}
+
 	@OneToMany(
 	        mappedBy = "nadredjena",
 	        cascade = CascadeType.ALL

@@ -18,11 +18,10 @@
 		               	rowsPerPageTemplate="5,10,15"
 		               	paginatorPosition="top"
 		               	selectionMode="single" 
-		               	selection="#{funkcionalnostController.izabranaFunkcionalnost}" 
 		               	rowKey="#{_funkcionalnost.id}">
 		               	
-		              	<p:ajax event="rowSelect" update=":dodavanje :izmjena"/>
-		        		<p:ajax event="rowUnselect" update=":izmjena :dodavanje"/>
+		              	<p:ajax event="rowSelect" listener="#{funkcionalnostController.onRowSelect}" update=":dodavanje :izmjena"/>
+		        		<p:ajax event="rowUnselect" listener="#{funkcionalnostController.onRowUnselect}" update=":izmjena :dodavanje"/>
 		               	
 		            	<p:column headerText="No" styleClass="ccr" sortBy="#{_funkcionalnost.id}" >
 		            		<h:outputText value="#{_funkcionalnost.id}" />

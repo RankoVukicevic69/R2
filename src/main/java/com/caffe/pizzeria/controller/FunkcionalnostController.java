@@ -21,6 +21,7 @@ import com.caffe.pizzeria.model.Funkcionalnost;
 import com.caffe.pizzeria.model.Metoda;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 @Named
 @ViewScoped
@@ -222,4 +223,17 @@ public class FunkcionalnostController implements Serializable{
         return errorMessage;
     }
 	
+	public void onRowSelect(SelectEvent event) {
+        izabranaFunkcionalnost =  (Funkcionalnost) event.getObject();
+        if (izabranaFunkcionalnost != null) {
+        	List<Metoda> metode = izabranaFunkcionalnost.getMetode();
+        	if (metode == null || metode.size() == 0) {
+            	System.out.println("Nema metoda");        		
+        	}
+        }
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+    	izabranaFunkcionalnost = null;
+    }
 }
