@@ -224,7 +224,7 @@ public class FunkcionalnostController implements Serializable{
     }
 	
 	public void onRowSelect(SelectEvent event) {
-        izabranaFunkcionalnost =  (Funkcionalnost) event.getObject();
+        //izabranaFunkcionalnost =  (Funkcionalnost) event.getObject();
         if (izabranaFunkcionalnost != null) {
         	List<Metoda> metode = izabranaFunkcionalnost.getMetode();
         	if (metode == null || metode.size() == 0) {
@@ -234,6 +234,6 @@ public class FunkcionalnostController implements Serializable{
     }
  
     public void onRowUnselect(UnselectEvent event) {
-    	izabranaFunkcionalnost = null;
+    	//izabranaFunkcionalnost = null;
     }
 }

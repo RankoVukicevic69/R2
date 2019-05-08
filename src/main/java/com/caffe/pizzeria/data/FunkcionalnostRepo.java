@@ -34,7 +34,7 @@ public class FunkcionalnostRepo {
    
     @SuppressWarnings("unchecked")
 	public List<Funkcionalnost> findByNadId(Long nadId) {
-    	String hql = "SELECT f FROM funkcionalnost f LEFT JOIN f.nadredjena n WHERE f.aktivna = true AND n.id = " + nadId.toString();
+    	String hql = "SELECT f FROM funkcionalnost f JOIN f.nadredjena n WHERE f.aktivna = true AND n.id = " + nadId.toString();
     	Query query = em.createQuery(hql);
     	return (List<Funkcionalnost>)query.getResultList();
     }

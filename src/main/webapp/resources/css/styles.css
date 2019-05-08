@@ -10,6 +10,15 @@ body, #titlebar, #sidebar, #contentPane, div.margin, div.visual, div.header {
   
 }
 
+.ui-g {
+    background-color: #ededed;
+    text-align: center;
+    border: 1px solid #fafafa;
+    width: 100%;
+}
+
+
+
 body, div.margin {
   margin: 3px;
 }

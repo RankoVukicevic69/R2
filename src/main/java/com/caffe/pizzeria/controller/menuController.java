@@ -9,20 +9,29 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuModel;
+
 import com.caffe.pizzeria.data.FunkcionalnostRepo;
 import com.caffe.pizzeria.model.Funkcionalnost;
 
 @Named
 @ViewScoped
-public class meni implements Serializable{
+public class menuController implements Serializable{
 	private static final long serialVersionUID = -8057674610262587838L;
 	
     @Inject
     private FunkcionalnostRepo funkcionalnostRepo;
 
-	@Produces
     private Funkcionalnost izabrana;
     
+    private MenuModel model;
+
+	public MenuModel getModel() {
+		return model;
+	}
+
 	public Funkcionalnost getIzabrana() {
 		return izabrana;
 	}
@@ -43,9 +52,26 @@ public class meni implements Serializable{
 
 	@PostConstruct
     private void init() {
-		izabrana = funkcionalnostRepo.findById(0L);
-		funkcionalnosti= funkcionalnostRepo.findByNadId(izabrana.getId());
-    	System.out.println(izabrana.getStranica().getNaziv());		
+        model = new DefaultMenuModel();
+		funkcionalnosti= funkcionalnostRepo.findByNadId(0L);
+		if (funkcionalnosti != null) {
+			for(Funkcionalnost f : funkcionalnosti) {
+				if (f.getPodredjene() != null && f.getPodredjene().size() > 0)
+				{
+			        DefaultSubMenu submenu = new DefaultSubMenu(f.getNaziv());
+					//...
+			        model.addElement(submenu);
+				}
+				else {
+					if (f.getStranica() != null) {
+						
+					}
+				}
+			}
+			if (izabrana.getStranica() != null) {
+		    	System.out.println(izabrana.getStranica().getNaziv());						
+			}			
+		}
 	}
 
 	public void meniAdd(Funkcionalnost f) {

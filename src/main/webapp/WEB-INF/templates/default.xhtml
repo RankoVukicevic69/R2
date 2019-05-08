@@ -1,27 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>jboss-javaee-webapp</title>
+    <title>caffe-pizzeria</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <h:outputStylesheet name="css/styles.css" />
     <h:outputScript library="js" name="montenegroLocale.js"/>
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-   		<p:layoutUnit styleClass="ui-widget ui-widget-header" position="north" size="40" header="Naziv applikativnog rjeshenja" />
-  		<p:layoutUnit position="west" header="Opcije" collapsible="true">
-  			<ui:insert name="left">
+		<p:layoutUnit styleClass="ui-widget" position="north" size="40">
+			<ui:insert name="meni">
  	    		[Template content will be inserted here]
 			</ui:insert>
     	</p:layoutUnit>
-		<ui:insert name="content">
-	    	[Template content will be inserted here]
-		</ui:insert>
-   		<p:layoutUnit styleClass="ui-widget ui-widget-header" position="south" size="40" header="@Copirifgh COREIT" />
+ 		<p:layoutUnit styleClass="ui-widget" position="center">
+    		<div id="myScreen" class="right col scroll-x scroll-y">
+        		<ui:insert name="content">My Screen Content Goes Here</ui:insert>
+   			</div> 		
+    	</p:layoutUnit>
+   		<p:layoutUnit styleClass="ui-widget" position="south" size="40" header="@Copirifgh COREIT" />
     </p:layout>
 </h:body>
 </html>

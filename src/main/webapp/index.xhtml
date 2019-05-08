@@ -5,22 +5,17 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 	<ui:composition template="/WEB-INF/templates/default.xhtml">
-	    <ui:define name="left">
-	    	<h:form>
-           		<h:panelGroup>
-           			<h:panelGrid columns="1">
-   						<ui:repeat value="#{meni.funkcionalnosti}" var="funk">  
-	            			<h:commandButton value="#{funk.naziv}" style="width: 180px;">
-	            			</h:commandButton>
-	          			</ui:repeat>
-               		</h:panelGrid>
-           		</h:panelGroup>
-         	</h:form>
+	    <ui:define name="meni">
+    		<p:menu model="#{menuController.model}" />
 		</ui:define>
 	    <ui:define name="content">
-          		<h:panelGroup rendered="#{not empty meni.izabrana.stranica}">
-	    			<ui:include src="#{meni.izabrana.stranica.naziv}" />
+          		<!-- <h:panelGroup rendered="#{not empty menuController.izabrana}">
+          			<h:panelGroup rendered="#{not empty menuController.izabrana.stranica}">
+	    				<ui:include src="#{menuController.izabrana.stranica.naziv}" />
+           			</h:panelGroup>
            		</h:panelGroup>
+           		 -->
 		</ui:define>
 	</ui:composition>
 </html>
+
