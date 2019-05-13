@@ -10,6 +10,15 @@ body, #titlebar, #sidebar, #contentPane, div.margin, div.visual, div.header {
   
 }
 
+.panelStyle, .ui-panel .ui-panel-content {
+         background: #272A2D;
+         color: #4277AD;
+         font-weight: bold;
+         border-style: none;
+}
+
+.ui-panel {width: auto !important;}
+
 .ui-g {
     background-color: #ededed;
     text-align: center;
@@ -41,59 +50,5 @@ body, div.margin {
   margin: auto;
   height: 1.0em;
   line-height: 1.0em;
-  text-align: center;
-}
-
-#sidebar {
-  top: 4.0em;
-  width: 220px;
-  right: auto;
-}
-
-#sidebar div.visual {
-  padding: 5px;
-  border: thin solid lightgray;
-  background: #eeeeee;
-  overflow: auto;
-}
-
-#contentPane {
-  top: 4.0em;
-  left: 220px;
-  width: auto;
-}
-
-#contentPane div.visual {
-  padding: 0.5em;
-  border: thin solid lightgray;
-  background: #fefeef;
-}
-
-.planetImage {
-  padding: 5px;
-  text-align: center;
-  border: thin solid #eeeeee;
-}
-
-.planetImageSelected {
-  padding: 5px;
-  text-align: center;
-  background: #fefeef;
-  border: thin solid lightGray;
-}
-
-.planetLabel {
-  padding-bottom: 1.0em;
-  text-align: center;
-  font-weight: bold;
-}
-
-.welcome {
-  font-style: italic;
-  font-family: Palatino;
-}
-
-.welcomeImage {
-  margin-top: 10px;
   text-align: center;
 }
