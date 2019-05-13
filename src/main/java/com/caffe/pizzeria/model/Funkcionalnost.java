@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,10 +39,10 @@ public class Funkcionalnost implements Serializable{
 	@Column(name = "ak_fun")
 	private boolean aktivna;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Funkcionalnost nadredjena;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Stranica stranica;
 	
 	public Stranica getStranica() {
@@ -58,7 +59,7 @@ public class Funkcionalnost implements Serializable{
 	)
 	private List<Funkcionalnost> podredjene = new ArrayList<Funkcionalnost>();
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Metoda> metode = new ArrayList<Metoda>();
     
 	public List<Metoda> getMetode() {

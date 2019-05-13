@@ -24,10 +24,12 @@ public class menuController implements Serializable{
     @Inject
     private FunkcionalnostRepo funkcionalnostRepo;
 
+    @Produces
     private Funkcionalnost izabrana;
     
     private MenuModel model;
 
+    @Produces
 	public MenuModel getModel() {
 		return model;
 	}
@@ -39,7 +41,6 @@ public class menuController implements Serializable{
 	public void setIzabrana(Funkcionalnost izabrana) {
 		this.izabrana = izabrana;
 	}
-
 
 	private List<Funkcionalnost> funkcionalnosti;
 	
@@ -53,24 +54,33 @@ public class menuController implements Serializable{
 	@PostConstruct
     private void init() {
         model = new DefaultMenuModel();
-		funkcionalnosti= funkcionalnostRepo.findByNadId(0L);
+		funkcionalnosti= funkcionalnostRepo.findAll();
 		if (funkcionalnosti != null) {
 			for(Funkcionalnost f : funkcionalnosti) {
-				if (f.getPodredjene() != null && f.getPodredjene().size() > 0)
-				{
-			        DefaultSubMenu submenu = new DefaultSubMenu(f.getNaziv());
-					//...
-			        model.addElement(submenu);
+				if ( f == null) {
+			    	System.out.println("f1 - null");											
 				}
 				else {
-					if (f.getStranica() != null) {
-						
+			    	System.out.println("f1 - " + f.getNaziv());						
+					if (f.getPodredjene() != null ) {
+						if ( f.getPodredjene().size() > 0) {
+							for(Funkcionalnost ff : f.getPodredjene()) {
+								System.out.println("f2 -- " + ff.getNaziv());
+							}
+						}
+						else {
+							if (f.getStranica() != null) {
+						    	System.out.println("f3 - " + f.getStranica().getNaziv());						
+							}
+						}
+					}
+					else {
+						if (f.getStranica() != null) {
+					    	System.out.println("f3 - " + f.getStranica().getNaziv());						
+						}
 					}
 				}
 			}
-			if (izabrana.getStranica() != null) {
-		    	System.out.println(izabrana.getStranica().getNaziv());						
-			}			
 		}
 	}
 

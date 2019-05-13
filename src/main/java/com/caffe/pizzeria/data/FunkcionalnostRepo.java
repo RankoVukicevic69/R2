@@ -7,9 +7,9 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
@@ -32,11 +32,20 @@ public class FunkcionalnostRepo {
         return em.find(Funkcionalnost.class, id);
     }
    
-    @SuppressWarnings("unchecked")
 	public List<Funkcionalnost> findByNadId(Long nadId) {
-    	String hql = "SELECT f FROM funkcionalnost f JOIN f.nadredjena n WHERE f.aktivna = true AND n.id = " + nadId.toString();
-    	Query query = em.createQuery(hql);
-    	return (List<Funkcionalnost>)query.getResultList();
+		System.out.println("-- executing query 01 --");
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		System.out.println("-- executing query 02 --");
+		CriteriaQuery<Funkcionalnost> criteria = builder.createQuery( Funkcionalnost.class );
+		System.out.println("-- executing query 03 --");
+		Root<Funkcionalnost> f1 = criteria.from(Funkcionalnost.class);
+		System.out.println("-- executing query 04 --");
+		f1.fetch("nadredjena", JoinType.LEFT);
+		System.out.println("-- executing query 05 --");
+		criteria.where(builder.equal(f1.get("nadredjena").get("aktivna"), true));
+		System.out.println("-- executing query 06 --");
+		builder.and(builder.equal(f1.get("nadredjena").get("id"), nadId));	
+        return em.createQuery(criteria).getResultList();
     }
 
     public Funkcionalnost findByNaziv(String naziv) {
