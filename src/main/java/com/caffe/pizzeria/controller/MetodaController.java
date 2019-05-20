@@ -67,6 +67,7 @@ public class MetodaController implements Serializable{
     
     private void retrieveAllMetode() {
         metode = metodaRepo.findAll();
+    	System.out.println("Metode : " + metode.size());        	        
     }
 
     public void onMetodaListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Metoda metoda) {

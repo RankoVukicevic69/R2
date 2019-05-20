@@ -4,42 +4,34 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-	<ui:composition template="/WEB-INF/templates/default.xhtml">
+	<ui:composition template="/WEB-INF/template.xhtml">
 	    <ui:define name="content">
-  
-<div class="tab-pane fade active in" style="background-color: white;">
-            <h:form>
-                <div class="well well.light box-shadown"
-                    style="background-color: white;">
-                    <div align="center">
-                        <h:panelGrid columns="5">
-                            <h:outputLabel value="Numero do Contrato" />
-                            <h:outputText value="" />
-                            <h:outputLabel value="" />
-                            <h:outputText value="" />
-                            <h:outputLabel value="" />
-                            <h:inputText  >
-                            <f:convertNumber integerOnly="true"/>
-                            </h:inputText>
-                            <h:outputText value="-" />
-                            <h:inputText  >
-                            <f:convertNumber integerOnly="true"/>
-                            </h:inputText>
-                            <h:outputText value="-" />
-                            <h:inputText >
-                            <f:convertNumber integerOnly="true"/>
-                            </h:inputText>
-                        </h:panelGrid>
-                    </div>                        
-                </div>
-                <div class="row-fluid">
-                    <h:commandButton styleClass="btn btn-success span2 offset8" value="Pesquisar" />
-                    <h:commandButton value="Cancelar" styleClass="btn btn-primary span2" immediate="true" />
-                </div>
- 
- 
-            </h:form>
-        </div>        
+			<div class="tab-pane fade active in" style="background-color: white;">
+            	<h:form>
+                 	<div class="row-fluid">
+                    	<p:commandButton styleClass="btn btn-success span2 offset8" value="Opcija I" />
+                    	<p:commandButton value="Opcija II" styleClass="btn btn-primary span2" immediate="true" />
+                	</div>
+ 					<p:outputPanel layout="block">
+  						<h3>The Volkswagen CC (also known as the Volkswagen Passat CC)</h3>
+  						<p>is a four-door coupe version of the Volkswagen Passat.</p>
+					</p:outputPanel>
+            	</h:form>
+				<h:form>
+    				<p:panel id="panel" header="Form" style="margin-bottom:10px;">
+        				<p:messages id="messages" />
+        				<h:panelGrid columns="2" cellpadding="5">
+            				<h:outputLabel for="name" value="Standard Label:" />
+            				<p:inputText id="name" required="true" />
+				            <p:outputLabel for="@next" value="Extended Label:" />
+				            <p:inputText id="extended" required="true" />
+				            <p:outputLabel for="@next" value="Number:" />
+				            <p:spinner id="number" value="0"/>
+        				</h:panelGrid>
+    				</p:panel>
+    				<p:commandButton value="Submit" update="panel"  />
+				</h:form>            
+        	</div>        
 		</ui:define>
 	</ui:composition>
 </html>

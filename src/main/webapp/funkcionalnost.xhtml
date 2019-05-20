@@ -4,9 +4,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://primefaces.org/ui"
-    template="/WEB-INF/templates/default.xhtml">
+    template="/WEB-INF/template.xhtml">
     <ui:define name="content">
-    	<p:layoutUnit styleClass="ui-widget ui-widget-header" position="center" header="Lista Funkcionalnosti">
 		    	<h:form id="reg">
 		    		<p:growl id="msgs" showDetail="true" life="2000" />
 		     		<p:dataTable id="tbFunkcionalnost" vidgetwar="tbFunkcionalnost" var="_funkcionalnost" value="#{funkcionalnostController.funkcionalnosti}" 
@@ -35,8 +34,6 @@
 		        		</p:column>
 			        	</p:dataTable>
 					</h:form>
-		</p:layoutUnit>
-   		<p:layoutUnit class="lp" position="east" size="400" collapsible="true" header="Funkcionalnost">
 			<h:form id="dodavanje" rendered="#{empty funkcionalnostController.izabranaFunkcionalnost}">
 		 		 			<h:panelGrid  columns="2" columnClasses="fc1,sc1">
 								<p:outputLabel for="naziv" value="Naziv:" />
@@ -83,6 +80,5 @@
 			  			</p:layoutUnit>
 			  		</p:layout>
 		     	</h:form>
-		     </p:layoutUnit>
     </ui:define>
 </ui:composition>
